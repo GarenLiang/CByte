@@ -14,14 +14,22 @@ Use the Parameter Testing feature in the box below to test your code with differ
 */
 
 function SymmetricTree(strArr) {
-    revarr=strArr.reverse()
-    line=1
-    while(revarr.length){
-        splice=revarr.splice(revarr.length-line)
-        if(splice.join("")!==splice.reverse().join("")){
-            return false;
-        }
-        line=line*2
+  let x = 1;
+  let count = 0;
+  while (strArr.length) {
+    x++;
+    if (x > 10) break;
+    let length = Math.pow(2, count);
+    let newArray = strArr.splice(0, length);
+    let revArray = Array.from(newArray).reverse();
+    if(!sameAs(newArray, revArray)) {
+      return false;
     }
-    return true
+    count = newArray.filter(val => val !== '#').length;
+  }
+  return true;
+}
+
+function sameAs(arr1, arr2) {
+  return arr1.every((val, ind) => val === arr2[ind]);
 }
